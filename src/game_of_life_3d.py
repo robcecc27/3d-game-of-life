@@ -40,3 +40,22 @@ class GameOfLife3D:
             for y in range(self.size):
                 print("#" if self.grid[x, y, z] == 1 else ".", end="")
             print()
+
+def draw_cube(x, y, z):
+    vertices = [
+        [x-0.5, y-0.5, z-0.5], [x+0.5, y-0.5, z-0.5],
+        [x+0.5, y+0.5, z-0.5], [x-0.5, y+0.5, z-0.5],
+        [x-0.5, y-0.5, z+0.5], [x+0.5, y-0.5, z+0.5],
+        [x+0.5, y+0.5, z+0.5], [x-0.5, y+0.5, z+0.5]
+    ]
+    edges = [
+        (0, 1), (1, 2), (2, 3), (3, 0),
+        (4, 5), (5, 6), (6, 7), (7, 4),
+        (0, 4), (1, 5), (2, 6), (3, 7)
+    ]
+
+    glBegin(GL_LINES)
+    for edge in edges:
+        for vertex in edge:
+            glVertex3fv(vertices[vertex])
+    glEnd()
